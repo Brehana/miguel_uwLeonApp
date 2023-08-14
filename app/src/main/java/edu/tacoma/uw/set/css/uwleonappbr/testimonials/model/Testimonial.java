@@ -1,11 +1,14 @@
 package edu.tacoma.uw.set.css.uwleonappbr.testimonials.model;
 
+import java.io.Serializable;
+
 /**
  * This is the object class that holds all the information included in a testimonial submitted by
  * the student. Each field corresponds to a column in the Testimonials table in mysql database.
  * @author Devin Peevy
  */
-public class Testimonial {
+
+public class Testimonial implements Serializable {
 
     public final static String SEATTLE = "Seattle";
 
@@ -29,7 +32,7 @@ public class Testimonial {
 
     private final String studentMajor;
 
-    private final String programSeason;
+    private final String programQuarter;
 
     private String testimonialTitle;
 
@@ -54,9 +57,35 @@ public class Testimonial {
         this.studentName = studentName;
         this.studentCampus = studentCampus;
         this.studentMajor = studentMajor;
-        this.programSeason = programSeason + " " + programYear;
+        this.programQuarter = programSeason + " " + programYear;
         this.testimonialTitle = null;
         this.testimonialContent = null;
+    }
+
+    /**
+     * This is how a Testimonial is going to be constructed by the SubmitStudentInfoFragment.
+     * @param studentID 7 digit UW student id number.
+     * @param studentName The first and last name of the student.
+     * @param studentCampus The UW campus the student normally attends: SEATTLE, TACOMA, or BOTHELL.
+     * @param studentMajor The student's UW major.
+     * @param programQuarter The quarter of the student's program at UW Leon center.
+     * @param testimonialTitle The title of the testimonial.
+     * @param testimonialContent the body of the testimonial.
+     */
+    public Testimonial(int studentID,
+                       String studentName,
+                       String studentCampus,
+                       String studentMajor,
+                       String programQuarter,
+                       String testimonialTitle,
+                       String testimonialContent) {
+        this.studentID = studentID;
+        this.studentName = studentName;
+        this.studentCampus = studentCampus;
+        this.studentMajor = studentMajor;
+        this.programQuarter = programQuarter;
+        this.testimonialTitle = testimonialTitle;
+        this.testimonialContent = testimonialContent;
     }
 
     /**
@@ -86,8 +115,8 @@ public class Testimonial {
         return studentMajor;
     }
 
-    public String getProgramSeason() {
-        return programSeason;
+    public String getProgramQuarter() {
+        return programQuarter;
     }
 
     public String getTestimonialTitle() {
